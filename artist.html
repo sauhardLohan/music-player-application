@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>helper spotify sau</title>
+    <!-- Css file for font-awesome icons  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Css file for bootstrap  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <!-- Script file for font-awesome icons  -->
+    <script  src="https://kit.fontawesome.com/b3348ae33f.js"
+      crossorigin="anonymous">
+      </script>
+      <!-- Css file for page for various affects and media queries -->
+    <link rel="stylesheet" href="artist.css">
+  </head>
+  <body>
+    <!-- Modal (Pop up to Subscribe to Premium when clicked on profile picture)-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subscribe To Premium</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>BENEFITS:</h6>
+        <ol>
+          <li>Add free music</li>
+          <li>Unlimited songs download</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Navigation section to search or to subcribe or for notifications and more -->
+      <nav class="navbar fixed-top navbar-expand-md navbar-dark ">
+        <!-- Brand logo (which is a responsive logo on hovering) -->
+          <a class="navbar-brand " href="#">
+            <div id="brand-logo" >
+              <div id="brand-container"><i class="fa-sharp fa-solid fa-music"></i></div>
+              
+            </div>
+          </a>
+          <!-- Favourites -->
+          <ul class="navbar-nav mr-auto position-relative">
+            <li class="nav-item">
+                <a class="nav-link" href="#home">Favourites</a>
+            </li>
+            
+        </ul>
+        <!-- Personal image which when clicked shows popup to subscribe to premium -->
+          <div id="personal" class="me-sm-3 d-inline-block me-0">
+          <img src="images/W2S.png"  data-toggle="modal" data-target="#exampleModal" class="border border-warning rounded-circle align-self-center" alt="">
+        </div>
+        <!-- Notification bell -->
+        <i class="fa-regular fa-bell me-sm-3  align-self-center" id="notification-icon" style="font-size: 30px;color: white;"></i>
+        <!-- Navbar toggler button show when screen becomes smaller than lg -->
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Search which collapses and shows on clicking navbar toggler button when screen becomes smaller than lg -->
+      <div class="collapse navbar-collapse  ms-3" id="navbarSupportedContent">
+              
+        <form class="form-inline mt-3 me-3">
+        <div class="input-group mb-3">
+          <!-- Search button -->
+          <button class="btn btn-outline-secondary " type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+          <!-- Search input space -->
+          <input type="text" class="form-control bg-transparent " id="Search" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <!-- Mic icon  -->
+          <button class="btn btn-outline-secondary " type="button" id="microphone"><i class="fa-light fa-microphone"></i></button>
+
+        </div>
+
+        </form>
+       </div>
+      </nav>
+      <!-- Music player box which pop ups at bottom of screen when clicked on song to play button -->
+      <div class="container-fluid position-fixed " id="music-player-box">
+        <div class="row">
+          <div class="col px-1 px-md-2 pt-2  d-flex justify-content-around"  id="music-play">
+            <!-- Current music played information -->
+            <div class="d-flex justify-content-between player-items pt-sm-2 pt-md-0">
+              <div class="media d-inline-block ms-1 ms-md-2 ms-lg-0 align-middle"><img src="images/born to shine.png" alt="">
+              <div class="media-body d-inline-block  align-middle">
+                <!-- Song name  -->
+                <h6 class="  m-0">Born To Shine</h6>
+                <!-- Artist name  -->
+                <p class="  m-0">Diljit Dosanjh</p>
+              </div>
+            </div>
+            <!-- Options to like or ban -->
+            <div id="current-music-option">
+              <!-- heart icon  -->
+              <i class="fa-light fa-heart m-1 m-md-2"></i> 
+              <!-- ban icon  -->
+            <i class="fa-light fa-ban m-1 m-sm-0"></i> 
+            </div>
+            
+            </div>
+            
+            
+            <!-- Player controls -->
+            <div class="row mx-2 mx-md-3 mx-lg-0 my-1 my-sm-0" id="current-music">
+              <div class="col-12">
+                <div class="mx-auto width-fit-content" id="player">
+                  <!-- Shuffle icon  -->
+                  <i class="fa-solid fa-shuffle my-2 me-2 me-md-4"></i>
+                  <!-- Backward icon  -->
+                <i class="fa-solid fa-backward-step me-2"></i>
+                <!-- Pause icon  -->
+                <i class="fa-solid fa-pause me-2 border border-2 rounded-circle" id="pause"></i> 
+                <!-- Forward icon  -->
+                <i class="fa-solid fa-forward-step me-2 me-md-4"></i>
+                <!-- Repeat icon  -->
+                <i class="fa-solid fa-repeat"></i>
+                </div>
+              </div>
+
+
+              <!-- Slider -->
+              <div class="col-12 d-flex justify-content-around">
+                  <p class="d-inline-block ">2:00</p>
+                <input type="range" class="form-range d-inline-block w-75" id="customRange1">
+                <p class="d-inline-block ">4:00</p>
+              </div>
+            </div>
+              <!-- Other controls like queue device-player and volume control -->
+             <div class=" player-items row pb-3" >
+              <!-- Queue icon  -->
+              <svg role="img" height="16" width="16" class="align-self-center col-5 pe-0 offset-1 offset-sm-0 col-sm-3" ><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 013.5 1h9a2.5 2.5 0 010 5h-9A2.5 2.5 0 011 3.5zm2.5-1a1 1 0 000 2h9a1 1 0 100-2h-9z"></path></svg>
+              <!-- device-player icon  -->
+              <svg role="presentation" height="16" width="16" class="align-self-center p-0 col-5 col-sm-3"><path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15h-6.5A1.75 1.75 0 016 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25h-6.5zm-6 0a.25.25 0 00-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 010 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></path><path d="M13 10a2 2 0 11-4 0 2 2 0 014 0zm-1-5a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+              <div class="slidecontainer align-self-center d-flex justify-content-around p-sm-0 col-sm-6">
+                <!-- Volume icon  -->
+                  <svg role="presentation" height="16" width="16" class=" p-0"><path d="M9.741.85a.75.75 0 01.375.65v13a.75.75 0 01-1.125.65l-6.925-4a3.642 3.642 0 01-1.33-4.967 3.639 3.639 0 011.33-1.332l6.925-4a.75.75 0 01.75 0zm-6.924 5.3a2.139 2.139 0 000 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 4.29V5.56a2.75 2.75 0 010 4.88z"></path><path d="M11.5 13.614a5.752 5.752 0 000-11.228v1.55a4.252 4.252 0 010 8.127v1.55z"></path></svg>
+                <!-- Volume slider -->
+                <input type="range" min="1" max="100" value="50" class="slider align-middle " id="myRange">
+                
+                
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- Main center part of page divided into two parts on left main content and on right aside content-->
+      <main class="container " >
+        <div class="row" id="content"> 
+          <!-- Main content on left side  -->
+        <div class=" col col-lg-8 ps-sm-5 ps-3 pt-4" id="main-div">
+            <div class="row">
+              <!-- this is the card containing details of artist -->
+            <div class="card border-0 mb-1 col-md-11  mx-auto position-relative" id="artist-details">
+                <div class="row h-100">
+                  <div class="col-sm-5 col-12 "id="artist-image"></div>
+                <div class="card-body col-sm-5 col pt-5">
+                  <div class="position-relative">
+                    <!-- artist name  -->
+                    <h2 class="card-title m-0">Dua Lipa</h2>
+                    <!-- artist followers  -->
+                  <h5 class=" position-absolute">851 Followers</h5>
+                  </div>
+                  <!-- artist information  -->
+                  <p class="card-text m-0">British Singer</p>
+                  <p class="mb-5">Dua Lipa is an English singer-songwriter. Possessing a mezzo-soprano vocal range, she is known for her signature disco-pop sound. </p>
+                  <!-- play all button  -->
+                  <a href="#" class="btn  rounded-0 me-5 " id="play-all">Play All</a>
+                  <!-- follow link  -->
+                  <a href="#"class="text-decoration-none ">Follow</a>
+                  <p>247 Tracks | 128 Albums</p>
+                </div>
+                </div>
+              </div>
+              <!-- queue of songs to play  -->
+             <div class=" queues col-md-11 mx-auto " >
+
+            <ol class="favourite-songs p-0" >
+            <li class="media">
+              <div class="play d-inline-block mr-3">
+                <img  src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              <!-- different song options  -->
+              <div class="media-body d-inline-block align-top">
+                <!-- song name  -->
+                <h6 class="my-0">Stay The Night</h6>
+                <!-- artist name  -->
+                <p class="mb-0">Talia Mar</p> 
+              </div>
+              
+            </li>
+            <!-- this is the music player animation which is visible at start of second song that is three moving blocks  -->
+            <li class="media music-player">
+              <div class="player-runner">
+                <div class="player player1"></div>    
+                <div class="player player2"></div>
+                <div class="player player3"></div> 
+           </div>
+           <div class="play d-inline-block">
+          <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+          <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+          </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+              
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+               <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by  Ruth B  "> 
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Stay The Night</h6>
+                <p class="mb-0">Talia Mar</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Stay The Night</h6>
+                <p class="mb-0">Talia Mar</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Stay The Night</h6>
+                <p class="mb-0">Talia Mar</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+               
+              <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+            <li class="media  ">
+              <div class="play d-inline-block">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Stay The Night</h6>
+                <p class="mb-0">Talia Mar</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Stay The Night</h6>
+                <p class="mb-0">Talia Mar</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Night Changes</h6>
+                <p class="mb-0">One Direction</p>
+              </div>
+            </li>
+            <li class="media ">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block align-top">
+                <h6 class="my-0">Darkside</h6>
+                <p class="mb-0">Alan Walker</p> 
+              </div>
+            </li>
+            <li class="media" id="last-song">
+              <div class="play d-inline-block">
+                
+              <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+              <a href="#music-player-box"><i class="fa-thin fa-play"></i></a>
+              </div>
+              
+              <div class="media-body d-inline-block  align-top">
+                <h6 class="my-0">Dandelions</h6>
+                <p class="mb-0"> Ruth B </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+          </div>  
+        </div>
+
+        <!-- this page is responsive so as the size of page goes down from lg, the aside section collapses and a button is available to access queue which is done by below section  -->
+        <div class="dropdown d-lg-none position-fixed width-fit-content" id="queue-dropdown">
+          <!-- queue button to access the queue  -->
+          <button class="btn btn-secondary  bg-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </button>
+          <!-- dropdown menu appearing on clicking queue button  -->
+          <div class="dropdown-menu" id="queue-dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <!-- Similar artist section in dropdown  -->
+                <div class=" queues px-2" >
+                <ul class="similar-artist" id="similar-artist-dropdown">
+                  <div class=" position-relative d-inline-block h-25" >
+                     <h5 class="m-0 ">Similar artists</h5> 
+                  </div>
+                  <!-- Different songs in similar artist section  -->
+                  <li class="media dropdown-item">
+                    <div class="current-music-player">
+                      <!-- song image  -->
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                  <!-- Play and pause button which shows on hovering on image of music -->
+                      <div class="playpause">
+                      <input type="checkbox" id="input1" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input1" id="label1" tabindex=1></label>
+                    </div>
+                    </div>
+                <!-- Tells music name and release date  -->
+                    <div class="media-body d-sm-inline-block align-middle ">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                      <p>Sep 17,2022</p>
+                    </div>
+                <!-- Dropdown to show different options for selected music  -->
+                    <div class="dropdown d-inline-block lr-drop " >
+                      <div class="queue-submenu">
+                        <a  href="#" class="text-decoration-none "  >
+                    <i class="fa-light fa-ellipsis"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i></i>
+                    
+                  </a>
+                  <!-- submenu appears on hovering on dropdown icon  -->
+                    <div class="position-absolute border rounded p-1 submenu" >
+                      <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                    </div>
+                      </div>
+                    <p>4:44</p>
+                    </div>
+                
+
+                  </li>
+                  <li class="media dropdown-item">
+                    <div class="current-music-player">
+                      
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input2" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input2" id="label2" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                     <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop " >
+                      <div class="queue-submenu">
+                        <a  href="#" class="text-decoration-none "  >
+                    <i class="fa-light fa-ellipsis"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i></i>
+                    
+                  </a>
+                  
+                    <div class="position-absolute border rounded p-1 submenu" >
+                      <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                    </div>
+                      </div>
+                  
+                    
+                    <p>4:44</p>
+                    </div>
+                  </li>
+                  <li class="media dropdown-item">
+                    <div class="current-music-player">
+                      
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input3" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input3" id="label3" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                     <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop " >
+                      <div class="queue-submenu">
+                        <a  href="#" class="text-decoration-none "  >
+                    <i class="fa-light fa-ellipsis"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i></i>
+                    
+                  </a>
+                  
+                    <div class="position-absolute border rounded p-1 submenu" >
+                      <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                    </div>
+                      </div>
+                  
+                    
+                    <p>4:44</p>
+                    </div>
+                  </li>
+                  <li class="media dropdown-item">
+                    <div class="dropdown d-inline-block lr-drop " >
+                      <div class="queue-submenu">
+                        <a  href="#" class="text-decoration-none "  >
+                    <i class="fa-light fa-ellipsis"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i></i>
+                    
+                  </a>
+                  
+                    <div class="position-absolute border rounded p-1 submenu" >
+                      <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                    </div>
+                      </div>
+                  
+                    
+                    <p>4:44</p>
+                    </div>
+                    <div class="current-music-player">
+                      
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input4" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input4" id="label4" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>  
+                     <p>Sep 17,2022</p>
+                    </div>
+                    
+                  </li>
+                  </ul>
+                  <!-- Recently played section in dropdown  -->
+                  <div class=" position-relative d-inline-block " id="recently-played-list">
+                    <h5 class="m-0">Recently Played</h5> 
+                  </div>
+
+                  <!-- queue of Recently played Songs in dropdown menu -->
+                <ol class="favourite-songs" id="dropdown-fav-song">
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p> 
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by  Ruth B  ">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B ">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p>
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Stay The Night</h6>
+                    <p class="mb-0">Talia Mar</p>
+                  </div>
+                </li>
+                <li class="media dropdown-item">
+                  <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Night Changes</h6>
+                    <p class="mb-0">One Direction</p>
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Darkside</h6>
+                    <p class="mb-0">Alan Walker</p> 
+                  </div>
+                </li>
+                <li class="media  dropdown-item">
+                  <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                  <div class="media-body d-inline-block align-top">
+                    <h6 class="my-0">Dandelions</h6>
+                    <p class="mb-0"> Ruth B </p>
+                  </div>
+                </li>
+              </ol>
+              </div>
+          </div>
+        </div>
+        <!-- this page is responsive so as the size of page goes down from lg, the aside section collapses and a button is available to access it which is done by below section  -->
+        <aside class="col-lg p-0 d-lg-block d-none pt-4 w-100" aria-labelledby="dropdownMenuButton">
+          <!-- Similar artist section  -->
+            <h5>Similar Artists</h5>
+                  <!-- Different songs in similar artist section  -->
+              <div class="w-100 mt-2 similar-artist" id="similar-artists-info">
+                <ol class="list-unstyled justify-content-between ps-3 p-0" id="lr-content">
+                  <li class="media d-inline-block col  mb-1 w-100">
+                    <div class="current-music-player">
+                     <!-- song image  -->
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                  <!-- Play and pause button which shows on hovering on image of music -->
+                      <div class="playpause">
+                      <input type="checkbox" id="input5" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input5" id="label5" tabindex=1></label>
+                    </div>
+                    </div>
+                    <!-- song name and release date  -->
+                    <div class="media-body d-sm-inline-block align-middle ">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                      <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop " >
+                      <i class="fa-light fa-ellipsis" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <!-- Time duration of music  -->
+                      <p>4:44</p>
+                <!-- Dropdown to show different options for selected music  -->
+                      <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+                    <!-- PLay now option  -->
+                        <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                    <!-- Add to queue option  -->
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                    <!-- Add to Favourites option  -->
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                    <!-- Get Info option  -->
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="media d-inline-block col mb-1 w-100">
+                    <div class="current-music-player">
+                     
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input6" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input6" id="label6" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                     <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop" >
+                      <i class="fa-light fa-ellipsis " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <p class="">4:44</p>
+                      <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="media d-inline-block col mb-1 w-100">
+                    <div class="current-music-player">
+                      
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input7" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input7" id="label7" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>
+                     <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop" >
+                      <i class="fa-light fa-ellipsis " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <p class="">4:44</p>
+                      <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>
+    
+                      </div>
+                    </div>
+                  </li>
+                  <li class="media d-inline-block  col  w-100">
+                    <div class="current-music-player">
+                      
+                      <img class="mr-3 me-2" src="images/latest release.png" alt="Generic placeholder image">
+                      <div class="playpause">
+                      <input type="checkbox" id="input8" value="None" onclick="window.location.href='#music-player-box'"  name="check" />
+                      <label for="input8" id="label8" tabindex=1></label>
+                    </div>
+                    </div>
+                    <div class="media-body d-sm-inline-block align-middle">
+                      <h6 class="mt-0 mb-1 ">Imagine Dragons</h6>  
+                     <p>Sep 17,2022</p>
+                    </div>
+                    <div class="dropdown d-inline-block lr-drop" >
+                      <i class="fa-light fa-ellipsis " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <p class="">4:44</p>
+                      <div class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-item"><i class="fa-light fa-play"></i><a class="text-decoration-none" href="#">Play Now</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-plus"></i><a class="text-decoration-none" href="#">Add to queue</a></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-duotone fa-list-check"></i><a class="text-decoration-none" href="#">Add to Favourites</a></div>  
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><i class="fa-light fa-circle-info"></i><a class="text-decoration-none" href="#">Get Info</a></div>  
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+            </div>
+          
+          <!-- Recently played songs queue  -->
+            <h5 >Recently Played</h5>
+              <div class="w-100 queues mt-3 " >
+              <ol class="favourite-songs">
+                <!-- different songs queue in recently played section  -->
+              <li class="media">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <!-- song name  -->
+                  <h6 class="my-0">Stay The Night</h6>
+                  <!-- artist name  -->
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+             
+              <li class="media my-1 music-player">
+              <!-- animation of music player moving blocks appearing before second song  -->
+                <div class="player-runner">
+                  <div class="player player1"></div>
+                  <div class="player player2"></div>
+                  <div class="player player3"></div> 
+             </div>
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Stay The Night</h6>
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Stay The Night</h6>
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Stay The Night</h6>
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Stay The Night</h6>
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Stay the night.png" alt="stay the night by talia mar">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Stay The Night</h6>
+                  <p class="mb-0">Talia Mar</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Night changes.png" alt="Night Changes by one direction">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Night Changes</h6>
+                  <p class="mb-0">One Direction</p>
+                </div>
+              </li>
+              <li class="media my-1">
+                <img class="mr-3" src="images/Darkside.png" alt="Darkside by alan walker">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Darkside</h6>
+                  <p class="mb-0">Alan Walker</p> 
+                </div>
+              </li>
+              <li class="media mt-1 " id="margin-set">
+                <img class="mr-3" src="images/Dandelions.png" alt="Dandelions by Ruth B">
+                <div class="media-body d-inline-block align-top">
+                  <h6 class="my-0">Dandelions</h6>
+                  <p class="mb-0"> Ruth B </p>
+                </div>  
+              </li>
+            </ol>
+            </div>
+        </aside>
+      
+        </div>
+        
+      </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

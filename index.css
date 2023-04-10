@@ -1,0 +1,853 @@
+:root {
+  --min-width: 296px;
+  /* theme colors for background and  eue hover */
+  --color-left: rgb(0, 68, 77);
+  --color-right: rgb(158, 77, 1);
+  /* icons color  */
+  --icons-color: white;
+  /* like-color */
+  --like: cyan;
+  /* different names color on the page  */
+  --name-color: white;
+}
+/* caption color artist name in popular artist and latest english */
+.figure-caption {
+  color: rgb(163, 240, 127) !important;
+}
+
+body {
+  /* background:radial-gradient( circle farthest-corner at 22.4% 21.7%, rgb(4, 0, 54) 0%, rgb(6, 42, 139) 100.2% ); */
+  background: radial-gradient(
+    circle farthest-corner at 22.4% 21.7%,
+    var(--color-left) 0%,
+    var(--color-right) 100.2%
+  );
+}
+
+.width-fit-content {
+  width: fit-content;
+}
+.height-fit-content {
+  height: fit-content;
+}
+a {
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+i {
+  font-family: "FontAwesome";
+  font-style: normal;
+  color: var(--icons-color);
+}
+#dropdownMenuButton {
+  background: transparent;
+}
+
+/* NAVIGATION SECTION on top */
+
+/* set minimum width of navigation section to be 296 px  */
+.navbar {
+  min-width: var(--min-width);
+}
+/* Brand logo and it's animation on hover  */
+
+#brand-logo {
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  transition: all 0.2s;
+  margin-left: 0.6rem;
+}
+
+/* brand logo changes on hover like color and scaling  */
+#brand-logo:hover {
+  transform: scale(1.2);
+  border-color: #9a2970;
+}
+#brand-logo:hover i {
+  color: blue;
+}
+#brand-logo:hover #brand-container {
+  background-color: #9a2970;
+}
+/* brand container div containing music icon */
+#brand-container {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border-radius: 50%;
+  top: 4%;
+  left: 4.4%;
+}
+/* brand logo music icon in middle  */
+#brand-logo i {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  font-size: 135%;
+}
+/* Setting the width to navbar-nav to create space in between favourites and personal image */
+.navbar-nav {
+  width: 60%;
+}
+/* Div containing personal image  */
+#personal {
+  width: 65.1px;
+}
+/* Personal image styling */
+#personal img {
+  width: 65px;
+  max-width: 65px;
+  min-width: 47px;
+  cursor: pointer;
+}
+/* Animation for notification bell  */
+
+@keyframes shaking {
+  0%,
+  7% {
+    /*to get delay in between shaking animation*/
+    transform: rotateZ(0);
+  }
+  14% {
+    transform: rotateZ(-16deg);
+  }
+  19% {
+    transform: rotateZ(10deg);
+  }
+  24% {
+    transform: rotateZ(-10deg);
+  }
+  29% {
+    transform: rotateZ(6deg);
+  }
+  34% {
+    transform: rotateZ(-4deg);
+  }
+
+  40%,
+  100% {
+    /*to get delay in between shaking animation*/
+    transform: rotateZ(0);
+  }
+}
+/* Time duration to notification icon to be 2s with infinite iterations */
+#notification-icon {
+  animation: shaking 2s linear infinite;
+}
+/* Red dot on notification bell icon to show new notifications */
+#notification-icon::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  right: 10%;
+  border-radius: 50%;
+  background-color: red;
+  width: 7px;
+  height: 7px;
+}
+
+/* Making the search bar to be in same box with no borders seperating between icons and input space  */
+#Search {
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+#button-addon2 {
+  border-right: 0 !important;
+  border-color: #ced4da !important;
+}
+
+#microphone {
+  border-left: 0 !important;
+  border-color: #ced4da !important;
+}
+
+/* MAIN SECTION  */
+main {
+  position: relative;
+  width: 100vw;
+  margin-top: 6.03rem;
+}
+
+/* Main-content on left side  */
+#content {
+  width: 100vw !important;
+}
+/* main div with all the sections in content  */
+
+/* Making overflow to be auto to be able to scroll through main-content */
+#main-div {
+  height: 83.9vh;
+  background-size: cover;
+  overflow: auto;
+}
+#main-div .section-heading {
+  color: var(--name-color);
+}
+/* making webkit-scrollbar for main-div display none so that scroll bar is not visible  */
+#main-div::-webkit-scrollbar {
+  display: none;
+}
+
+/* ASIDE SECTION 
+to display queue of songs only visible for breakpoints above lg*/
+
+/* Making overflow to be auto to be able to scroll through main-content */
+.queues {
+  overflow: auto;
+  height: 75.9vh;
+}
+/* Setting the required dimensions for images of song  */
+.queues img {
+  width: 3rem;
+  margin-right: 10px;
+}
+/* To make the list of songs to have the list counter to be as 01 02 ...  */
+/* (could have been done by list-style-type: decimal-leading-zero but it gives list style to be 01. 02. ...  
+the numbers are shown with a decimal by them as desired numbering is 01 not 01. hence this method is used)  */
+/* For making the custom desired numbering first I made list-style-type to be none to have no numbering then gave my own counter 
+reset to be req-counter */
+.queues ol {
+  counter-reset: req-counter;
+  list-style-type: none;
+}
+/* Then using before element gave content value to be starting with 0 and followed by req-counter 
+and then increasing the value of req-counter by using counter-increment  */
+.queues li:before {
+  content: "0" counter(req-counter) "  ";
+  counter-increment: req-counter;
+  margin-right: 10px;
+  color: var(--name-color);
+}
+/* This is done so that only first ten child have 0 at starting i.e 0-9  */
+.queues li:nth-child(n + 10):before {
+  content: counter(req-counter) " ";
+}
+
+/* making webkit-scrollbar display none so that scroll bar is not visible  */
+.queues::-webkit-scrollbar {
+  display: none;
+}
+/* For different songs present in queue  */
+
+/* making all li of queues as relative to adjust position of heart icon */
+.favourite-songs li {
+  position: relative;
+  padding: 10px;
+}
+/* adjusting position of heart icon here f004 is the unicode of heart font awesome icon  */
+.favourite-songs li::after {
+  content: "\f004";
+  color: var(--like);
+  font: var(--fa-font-regular);
+  position: absolute;
+  right: 3%;
+  top: 16%;
+}
+/* Giving the effect on hovering of different songs */
+aside .favourite-songs li {
+  transition: background-color 0.2s linear;
+}
+aside p,
+h6 {
+  color: var(--name-color);
+}
+.favourite-songs li:hover {
+  background-color: var(--color-left) !important;
+}
+
+/* QUEUE DROPDOWN
+appearing for breakpoints below lg*/
+/* Adjusting location of dropdown menu on screen  */
+#queue-dropdown {
+  right: 0%;
+  top: 30%;
+  z-index: 10000;
+}
+
+#queue-dropdown-menu {
+  top: 92px !important;
+  background: radial-gradient(
+    circle farthest-corner at 22.4% 21.7%,
+    rgb(4, 0, 54) 0%,
+    rgb(1, 43, 158) 100.2%
+  );
+}
+/* Setting the size of dropdown  */
+#queue-dropdown .queues {
+  width: 18rem;
+  height: 70vh;
+}
+/* Setting the font-size of artist names  */
+#queue-dropdown .queues #dropdown-fav-song p {
+  font-size: 0.9rem;
+}
+/* decreasing the size of music images */
+#queue-dropdown .queues #dropdown-fav-song img {
+  height: 40px;
+  width: 40px;
+}
+/* Queue sub-menu to view playlist or favourite songs which shows on hovering on icon with queue name on top of dropdown */
+#submenu {
+  z-index: 10;
+  background-color: white;
+  display: none;
+  top: 40%;
+  left: 100%;
+}
+#queue-submenu:hover #submenu {
+  display: block;
+}
+
+/* CAROUSEL */
+/* setting the dimensions of carousel */
+#playlist {
+  height: 16.1rem;
+  min-width: 420px;
+}
+#playlist-items {
+  padding: 0;
+}
+/* To get the carousel to work I am decreasing the size of whole container and increasing the size of one specific box on hovering */
+/* decreasing size of carousel container on hovering */
+#playlist-items:hover .box {
+  transform: scale(0.8);
+  opacity: 0.7;
+}
+/* increasing size of box class for boxes on hovering for one specfic box on which cursor is placed   */
+#playlist-items .box:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* box class general class for all three boxes */
+.box {
+  transition: transform 0.2s ease-in-out;
+  width: 20vw;
+  min-width: 126.8px;
+}
+/* Setting dimensions of image of albums in carousel  */
+.box img {
+  width: 80%;
+  min-width: 120.4px;
+}
+
+#box2 {
+  margin-left: -5px;
+}
+#box3 {
+  margin-left: -5px;
+}
+
+/* LATEST RELEASE SECTION   */
+
+#latest-release {
+  min-width: var(--min-width);
+}
+#latest-release h5,
+p {
+  color: var(--name-color);
+}
+/* making all li elements as relative to adjust position of dropdown icon(three dots) */
+#lr-content li {
+  position: relative;
+}
+/* setting the properties of dropdown items which shows on clicking the dropdown icon(three dots) */
+#latest-release .media .dropdown-item i {
+  font-size: medium;
+  color: inherit;
+  margin-right: 1rem;
+}
+/* setting the position of dropdown icon with respect to li element for different songs  */
+.lr-drop {
+  position: absolute;
+  top: -22%;
+  right: 0%;
+}
+
+.lr-drop i {
+  font-size: 2rem;
+  color: var(--icons-color);
+}
+
+.current-music-player {
+  position: relative;
+  display: inline-block;
+}
+.current-music-player:hover .playpause label {
+  display: block;
+}
+.playpause {
+  position: absolute;
+  top: 40%;
+  left: 32%;
+  display: block;
+}
+/* with the help of checkbox property of responsiveness on click 
+I have implemented play and pause animation by making the checkbox display none and use label to make play and pause button 
+so default display of label is play button which is implemented by border-width of left border to be zero 
+and making height to be sum of border top and border bottom width and also making box sizing to be border box 
+which ensures all the height is of border only, border color is white for only border left to get the shape of play button.
+When checkbox is clicked (label in this case) border width is changed left border width and border style to be double
+so that pause button can be implemented.
+*/
+.playpause label {
+  display: none;
+  box-sizing: border-box;
+  width: 0px;
+  height: 24px;
+  border-color: transparent transparent transparent var(--icons-color);
+  transition: all ease;
+  cursor: pointer;
+  border-style: solid;
+  border-radius: 2px;
+  border-width: 12px 0 12px 20px;
+}
+.playpause input {
+  display: none;
+}
+
+.playpause #input1:checked + #label1 {
+  border-style: double;
+  border-width: 0px 0px 0px 20px;
+  border-radius: 0%;
+  display: block;
+}
+.playpause #input2:checked + #label2 {
+  border-style: double;
+  border-width: 0px 0px 0px 20px;
+  border-radius: 0%;
+  display: block;
+}
+.playpause #input3:checked + #label3 {
+  border-style: double;
+  border-width: 0px 0px 0px 20px;
+  border-radius: 0%;
+  display: block;
+}
+.playpause #input4:checked + #label4 {
+  border-style: double;
+  border-width: 0px 0px 0px 20px;
+  border-radius: 0%;
+  display: block;
+}
+
+/* POPULAR ARTISTS SECTION */
+#Popular-Artists {
+  min-width: var(--min-width);
+}
+/* setting width for figure containing different artists name and photo */
+#Popular-Artists .figure {
+  width: 9rem;
+}
+/* making images of artists more opaque */
+.play:hover img {
+  opacity: 0.5;
+}
+/* making all the div containing image of artists to be relative 
+so that play button can be adjusted to desired position by making it absolute */
+.play {
+  position: relative;
+}
+
+.play i {
+  position: absolute;
+  left: 43%;
+  top: 32%;
+  color: white;
+  display: none;
+  font-size: xx-large;
+}
+/* making display of play button to be block on hovering */
+.play:hover i {
+  display: block;
+}
+
+/* STATIONS SECTION  */
+/* setting the width of different stations present in station section  */
+#albums {
+  width: 99%;
+  min-width: var(--min-width);
+}
+/* putting constraint on images to have specific dimensions and properties */
+#albums img {
+  max-width: 5.1rem;
+  max-height: 5.1rem;
+  min-width: 5.1rem;
+  min-height: 5.1rem;
+  opacity: 0.7;
+  height: 100%;
+}
+/* Creating the stations icon with three boxes and middle box having a play icon */
+#albums #station-boxes {
+  width: 8rem;
+  height: 7rem;
+}
+#station-boxes1 {
+  top: 25%;
+}
+#station-boxes2 {
+  left: 22.5%;
+  top: 12.5%;
+}
+#station-boxes3 {
+  left: 35%;
+}
+#station-boxes3 i {
+  font-size: xx-large;
+}
+
+/* stations class for different stations  */
+.stations {
+  width: fit-content;
+  padding: 0 10px;
+  transition: transform 0.2s ease-in-out;
+  background: transparent;
+  border: none;
+}
+/* increasing size of stations on hover  */
+.stations:hover {
+  transform: scale(1.3);
+}
+/* giving the images of stations box-shadow  */
+.stations:hover img {
+  box-shadow: 0 1rem 3rem rgba(7, 232, 240, 0.9);
+}
+/* setting the position of name of stations  */
+.album-name {
+  top: 33%;
+  left: 0%;
+  width: 100%;
+}
+/* setting the properties of names in album-name class */
+.album-name p,
+h4 {
+  font-weight: 500;
+  text-align: center;
+}
+
+/* THEMES SECTION with party,road trip and electronic music albums */
+#themes {
+  min-width: var(--min-width);
+}
+/* setting the position of name of themes  */
+#themes .album-name {
+  top: 35%;
+}
+
+#themes .diff-themes {
+  padding: 0 6px 0 12px !important;
+}
+/* setting the properties of image  in themes section  */
+.theme-image {
+  width: 100%;
+  height: 160px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.theme-image img {
+  width: 100%;
+  height: 100%;
+  transition: transform 2s ease-in-out;
+  opacity: 0.65;
+}
+/* increasing the size only of image not the container gives the desired animation */
+.theme-image:hover img {
+  transform: scale(1.5, 1.5);
+  cursor: pointer;
+}
+.theme-image h4 {
+  transition: transform 0.7s ease-in-out;
+  color: var(--name-color);
+}
+
+/* increasing the size of name of themes  */
+.theme-image:hover h4 {
+  transform: scale(1.1);
+}
+
+/* giving the animation on hovering a background appears and disappears when cursor is moved away
+initially the background has zero width and is at right poisition on hovering slowly width becomes 100% and position starts from left */
+.theme-image h4::after {
+  content: "";
+  background-image: linear-gradient(to right, blue, black);
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  border-radius: 2px;
+  top: 0%;
+  right: 0%;
+  transition: all 0.7s ease-in-out;
+  z-index: -1;
+}
+.theme-image:hover h4::after {
+  left: 0%;
+  width: 100%;
+}
+/* LATEST ENGLISH SECTION */
+#Latest-English {
+  min-width: var(--min-width);
+}
+#Latest-English .figure {
+  height: 100%;
+}
+#Latest-English .figure img {
+  height: 59%;
+}
+/* LATEST HINDI SECTION */
+#Latest-Hindi {
+  min-width: var(--min-width);
+}
+#Latest-Hindi .figure {
+  height: 100%;
+}
+#Latest-Hindi .figure img {
+  height: 74%;
+}
+
+/* Music player box 
+which pop ups at bottom of screen when clicked on song to play button  */
+/* making initial width and height to be 0  */
+#music-player-box {
+  z-index: 10;
+  min-width: var(--min-width);
+  bottom: 0%;
+  width: 0;
+  height: 0;
+  overflow: hidden !important;
+  left: 0%;
+}
+/* when playpause button in latest relase section is pressed it appears  */
+#music-player-box:target {
+  background-color: black;
+  height: 4.8rem;
+  width: 100vw;
+  z-index: 100000;
+}
+/* container having contents of music player box  */
+#music-play {
+  position: relative;
+  overflow: hidden;
+}
+#music-play .player-items .media img {
+  width: 55px;
+  max-width: 60px;
+  position: relative;
+  z-index: 100;
+}
+
+.player-items {
+  width: 22%;
+}
+/* making the overflow of name of song and artist-name to be break word  */
+.player-items .media-body {
+  overflow-wrap: break-word;
+}
+
+#current-music #player i {
+  font-size: larger;
+}
+/* setting dimensions of pquse icon  */
+#pause {
+  padding: 10.3985px 14px;
+}
+/* setting the width of volume slider  */
+#myRange {
+  width: 5rem;
+}
+svg {
+  fill: var(--icons-color);
+}
+
+/* MEDIA QUERIES to make page responsive*/
+@media screen and (min-width: 991px) {
+  #playlist {
+    overflow: auto;
+  }
+  #player-cont-div {
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .box img {
+    width: 95%;
+    margin-left: 2%;
+  }
+  .box {
+    width: 24vw;
+    padding-top: 0 !important;
+  }
+  .player-items {
+    width: 45%;
+  }
+  #player-cont-div {
+    width: 73% !important;
+  }
+  #myRange {
+    width: 4rem;
+  }
+  #player i {
+    font-size: large;
+  }
+  #customRange1 {
+    margin: 0 10px;
+  }
+  .player-items .media-body p,
+  h6 {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  #playlist {
+    height: 33vh;
+  }
+  .navbar-nav {
+    width: 52%;
+  }
+  /* giving search bar background-color black on clicking navbar toggler button  */
+  .navbar-collapse {
+    background-color: black;
+    margin-left: 0 !important;
+    padding-left: 10px;
+  }
+  .theme-image {
+    width: 92%;
+    height: 15rem;
+  }
+  .theme-image img {
+    height: 100%;
+  }
+  #player-cont-div {
+    width: 99% !important ;
+  }
+  .player-items {
+    width: 58%;
+  }
+  #player i {
+    font-size: medium;
+  }
+  #music-play img {
+    width: 35px;
+  }
+  .player-items .media-body p {
+    font-size: 0.8rem;
+  }
+  #current-music .col-12 {
+    padding: 0%;
+  }
+  #customRange1 {
+    font-size: 100 !important;
+  }
+}
+@media screen and (max-width: 575px) {
+  #playlist {
+    height: 35vh;
+  }
+  .navbar-brand {
+    margin-right: 0;
+  }
+  .navbar-nav {
+    width: 21%;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+  }
+  .theme-image {
+    width: 100%;
+    height: 12rem;
+  }
+  .box {
+    width: 31vw;
+  }
+  #latest-release .play img {
+    width: 70px;
+  }
+  #personal img {
+    width: 47px;
+    margin: 0 2px;
+  }
+  #personal {
+    width: 46px;
+  }
+  #queue-dropdown .queues {
+    width: 16rem;
+    height: 60vh;
+  }
+  #submenu {
+    top: 100%;
+    left: 0%;
+  }
+  #brand-logo {
+    margin: 0 8px;
+  }
+  #myRange {
+    width: 3rem;
+  }
+  .lr-drop {
+    top: -12%;
+  }
+  #pause {
+    padding: 6.008px 8.4375px;
+  }
+  #music-play:target {
+    height: 5rem;
+  }
+  .player-items {
+    width: 61%;
+  }
+  #player-cont-div {
+    width: 79% !important;
+    margin-left: 13%;
+  }
+}
+@media screen and (max-width: 500px) {
+  /* hiding image of music in music-player-box */
+  #music-play img {
+    display: none;
+  }
+  #music-play .media-body {
+    margin-top: 10px;
+  }
+  .player-items .media-body h6 {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 440px) {
+  #playlist {
+    height: 29vh;
+  }
+  #playlist-items:hover .box {
+    transform: scale(0.95);
+  }
+  #playlist-items .box:hover {
+    transform: scale(1.1);
+  }
+  .navbar-toggler {
+    padding: 0.6%;
+    margin-right: 4px;
+  }
+  .player-items .media-body h6 {
+    font-size: 1.08rem;
+  }
+  .player-items .media-body p {
+    display: none;
+  }
+
+  #music-player-box:target {
+    height: 6rem;
+  }
+}
+@media screen and (max-width: 280px) {
+  #queue-dropdown .queues {
+    width: 10rem;
+  }
+  .favourite-songs .media-body {
+    display: block !important;
+  }
+}
